@@ -12,8 +12,4 @@ with open("input.txt") as f:
 
 print(max(kalorit))
 
-print(sorted(kalorit, reverse=True)[0])
-print(sorted(kalorit, reverse=True)[1])
-print(sorted(kalorit, reverse=True)[2])
-
 print(sum(sorted(kalorit, reverse=True)[0:3]))
