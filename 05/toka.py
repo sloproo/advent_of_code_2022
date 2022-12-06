@@ -12,7 +12,7 @@ def poista(pylvaasta: int, maara: int) -> list:
     return pylvaat[pylvaasta - 1][maara:]
 
 def lisaa(pylvaaseen: int, lisattava: list) -> list:
-    return lisattava[::-1] + pylvaat[pylvaaseen - 1]
+    return lisattava + pylvaat[pylvaaseen - 1]
 
 with open("data.txt") as f:
     for r in f:
