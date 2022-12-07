@@ -7,3 +7,4 @@ for i in range(len(data) - 13):
     if len(kirjaimet) == 14:
         print(f"Ensimmäisen viestinalkumarkkerin viimeinen merkki on {i+14} :s merkki")
         break
+    

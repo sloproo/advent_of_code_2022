@@ -7,3 +7,4 @@ for i in range(len(data) - 3):
     if len(kirjaimet) == 4:
         print(f"Ensimmäisen paketinalkumarkkerin viimeinen merkki on {i+4} :s merkki")
         break
+    

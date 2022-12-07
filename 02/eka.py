@@ -50,4 +50,3 @@ for peli in pelit:
     omat_pisteet += voittopisteet(peli)
 
 print(f"Omat pisteet: {omat_pisteet}")
-

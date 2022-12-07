@@ -11,4 +11,3 @@ with open("input.txt") as f:
             tonttu = 0
 
 print(max(kalorit))
-
