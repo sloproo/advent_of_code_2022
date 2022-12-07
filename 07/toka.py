@@ -36,12 +36,11 @@ for hakemisto in hakemistot:
 
 kapasiteetti = 70000000
 kaytetty = sum(tiedosto[2] for tiedosto in tiedostot)
-print(kaytetty)
 vapaana = kapasiteetti - kaytetty
 tarvittava = 30000000
 vapautettava = tarvittava - vapaana
-print(f"Tilaa on vapautettava (ehkä) {tarvittava - vapaana}")
 
-juuh = sorted(hakemistojen_koot, key=lambda hakemisto: hakemisto[1])
+hakemistot_koon_mukaan = sorted(hakemistojen_koot, key=lambda hakemisto: hakemisto[1])
+poistettava = [sopiva for sopiva in hakemistot_koon_mukaan if sopiva[1] >= vapautettava][0]
 
-print([jopo for jopo in juuh if jopo[1] >= vapautettava][0])
+print(f"Poistettava hakemisto on {poistettava[0]}, jonka koko on {poistettava[1]}")
