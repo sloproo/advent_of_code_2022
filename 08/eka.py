@@ -1,9 +1,10 @@
-with open("alku.txt") as f:
+with open("data.txt") as f:
     metsa = []
     for r in f:
         metsa.append([int(puu) for puu in r.strip()])
 
-nakyvia = 2 * (len(metsa)) + len(metsa[0]) - 2 + len(metsa[-1] - 2)
+# reunarivit, 2 vaakaan, 2 pystyyn
+nakyvia = 2 * (len(metsa)) + len(metsa[0]) - 2 + len(metsa[-1]) - 2
 
 for y in range(len(metsa)):
     if y == 0 or y == len(metsa) - 1:
@@ -13,11 +14,11 @@ for y in range(len(metsa)):
             continue
         if metsa[y][x] > max([metsa[y][vaaka] for vaaka in range(x)]):
             nakyvia += 1
-        elif metsa[y][x] > max([metsa[y][vaaka] for vaaka in range(x+1, len(x))]):
+        elif metsa[y][x] > max([metsa[y][vaaka] for vaaka in range(x+1, len(metsa[y]))]):
             nakyvia += 1
         elif metsa[y][x] > max([metsa[pysty][x] for pysty in range(y)]):
             nakyvia += 1
-        elif metsa[y][x] > max([metsa[pysty][x] for pysty in range(y+1, len(y))]):
+        elif metsa[y][x] > max([metsa[pysty][x] for pysty in range(y+1, len(metsa[y]))]):
             nakyvia += 1
         
 
