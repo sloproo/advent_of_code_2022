@@ -1,4 +1,4 @@
-with open("data.txt") as f:
+with open("alku.txt") as f:
     metsa = []
     for r in f:
         metsa.append([int(puu) for puu in r.strip()])
@@ -18,9 +18,10 @@ for y in range(len(metsa)):
             nakyvia += 1
         elif metsa[y][x] > max([metsa[pysty][x] for pysty in range(y)]):
             nakyvia += 1
-        elif metsa[y][x] > max([metsa[pysty][x] for pysty in range(y+1, len(metsa[y]))]):
+        elif metsa[y][x] > max([metsa[pysty][x] for pysty in range(y+1, len(metsa))]):
             nakyvia += 1
         
+# pystyrivi
 
 print(f"Näkyviä puita on {nakyvia}")
         
