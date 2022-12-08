@@ -13,7 +13,7 @@ for y in range(len(metsa)):
             continue
         if metsa[y][x] > max([metsa[y][vaaka] for vaaka in range(x)]):
             nakyvia += 1
-        elif metsa[y][x] > max([puu for puu in metsa[y][x+1:]]):
+        elif metsa[y][x] > max([metsa[y][vaaka] for vaaka in range(x+1, len(x))]):
             nakyvia += 1
         elif metsa[y][x] > max([puu for puu in metsa[:y][x]]):
             nakyvia += 1
