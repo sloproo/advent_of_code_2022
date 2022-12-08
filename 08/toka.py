@@ -38,5 +38,6 @@ for y in range(len(m)):
     for x in range(len(m[y])):
         if nakyman_pisteet(m, y, x) > paras_nakyma:
             paras_nakyma = nakyman_pisteet(m, y, x)
+            parhaan_koordinaatit = (y, x)
 
-print(paras_nakyma)
+print(f"Paras näkymä on pisteessä y = {parhaan_koordinaatit[0]}, x = {parhaan_koordinaatit[1]} ja sen näkymän pistemäärä on {paras_nakyma} .")

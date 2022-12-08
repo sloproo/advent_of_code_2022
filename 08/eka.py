@@ -21,7 +21,5 @@ for y in range(len(metsa)):
         elif metsa[y][x] > max([metsa[pysty][x] for pysty in range(y+1, len(metsa))]):
             nakyvia += 1
         
-# pystyrivi
-
-print(f"Näkyviä puita on {nakyvia}")
+print(f"Ulospäin näkyviä puita on {nakyvia}")
         
