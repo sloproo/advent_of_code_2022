@@ -30,14 +30,14 @@ for (suunta, maara) in paan_liikkeet:
         if ((abs(hannasta_paahan[0]) == 2 and abs(hannasta_paahan[1]) == 1) or 
             (abs(hannasta_paahan[0]) == 1 and abs(hannasta_paahan[1]) == 2)):
                 hanta = [hanta[0] + hannasta_paahan[0] // abs(hannasta_paahan[0]), 
-                hanta[1] + hannasta_paahan[1] // abs(hannasta_paahan[1])]
+                        hanta[1] + hannasta_paahan[1] // abs(hannasta_paahan[1])]
                 hannan_sijainnit.add((hanta[0], hanta[1]))
         elif (abs(hannasta_paahan[0]) == 2 and abs(hannasta_paahan[1]) == 0):
             hanta = [hanta[0] + hannasta_paahan[0] // abs(hannasta_paahan[0]), 
-                hanta[1]]
+                    hanta[1]]
             hannan_sijainnit.add((hanta[0], hanta[1]))
         elif (abs(hannasta_paahan[0]) == 0 and abs(hannasta_paahan[1]) == 2):
-            hanta = ([hanta[0], hanta[1] + hannasta_paahan[1] 
+            hanta = ([hanta[0], hanta[1] + hannasta_paahan[1]
                     // abs(hannasta_paahan[1])])
             hannan_sijainnit.add((hanta[0], hanta[1]))
 
