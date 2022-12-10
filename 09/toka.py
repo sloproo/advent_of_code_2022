@@ -29,6 +29,7 @@ for (suunta, maara) in paan_liikkeet:
             paa = koysi[i]
             hanta = koysi[i+1]
             hannasta_paahan = vertaa(paa, hanta)
+            
             if ((abs(hannasta_paahan[0]) == 2 and abs(hannasta_paahan[1]) >= 1) or 
                 (abs(hannasta_paahan[0]) >= 1 and abs(hannasta_paahan[1]) == 2)):
                     hanta = [hanta[0] + hannasta_paahan[0] // abs(hannasta_paahan[0]), 
