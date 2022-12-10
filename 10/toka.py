@@ -14,7 +14,7 @@ i_kasky = 0
 huomioitavien_summa = 0
 
 try:
-    for sykli in range(1, 5000):
+    for sykli in range(1, 241):
         if (sykli -1) % 40 >= rek - 1 and (sykli -1) % 40 <= rek + 1:
             print("█", end="")
         else:
