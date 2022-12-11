@@ -11,7 +11,6 @@ with open("data.txt") as f:
 rek = 1
 tois = False
 i_kasky = 0
-huomioitavien_summa = 0
 
 try:
     for sykli in range(1, 241):
