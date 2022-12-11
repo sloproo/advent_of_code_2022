@@ -57,10 +57,9 @@ class Apina:
 
 def alin_yhteinen_nimittaja(osoittajat: list) -> int:
     i = 0
-    suppeampi = set(osoittajat)
     while True:
         i += 1
-        for tekijä in jakajat:
+        for tekijä in osoittajat:
             if i % tekijä != 0:
                 break
         else:
