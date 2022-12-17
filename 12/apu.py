@@ -169,8 +169,8 @@ def liiku(alku: tuple, loppu: tuple, kartta: list, jaljet: list, kaydyt: list, a
 
 def etsi_kirjaimet(kirjain: str, kartta: list) -> list:
     paikat = []
-    for y in len(kartta):
-        for x in len(kartta[y]):
-            if kartta[y][x] == "kirjain":
+    for y in range(len(kartta)):
+        for x in range(len(kartta[y])):
+            if kartta[y][x] == kirjain:
                 paikat.append((y, x))
     return paikat
