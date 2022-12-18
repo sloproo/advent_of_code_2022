@@ -1,3 +1,9 @@
+def littea_lista(lista: list) -> bool:
+    for a in list:
+        if type(a) == list:
+            return False
+    return True
+
 def vertaa_listoja(eka: list, toka: list) -> int:
     vastaus = 0
     print(f"Verrataan paria\n{eka}\n\n{toka}\n")
@@ -28,36 +34,16 @@ def vertaa_listoja(eka: list, toka: list) -> int:
                 else:
                     raise ValueError("Numerot eivät vertautuneet")
             elif type(eka[i]) == list:
-                # kesken - Ei vissiin näin vaan niin kuin tämän alla
-                # for alkio in eka[i]:
-                #     if type(alkio) == list:
-                #         eka_verrattava = eka[i]
-                #         ekassa_listoja = True
-                #         break
-                # else:
-                #     eka_verrattava = eka
-                #     ekassa_listoja = False
-                # for alkio in toka[i]:
-                #     if type(alkio) == list:
-                #         toka_verrattava = toka[i]
-                #         tokassa_listoja = True
-                #         break
-                # else:
-                #     toka_verrattava = toka
-                #     tokassa_listoja = False
-                # if ekassa_listoja == False and tokassa_listoja == False:
-                #     vastaus = vertaa_listoja(eka[i], toka[i])
-                # else:
-                #     vastaus = vertaa_listoja(eka_verrattava, toka_verrattava)
                 vastaus = vertaa_listoja(eka[i], toka[i])
-        else:
+        
+        else: #eka[i] ja toka[i] eri tyyppiä
             if type(eka[i]) == int:
                 eka[i] = [eka[i]]
             elif type(toka[i]) == int:
                 toka[i] = [toka[i]]
             else:
                 raise ValueError("Eri tyypit sekaisin")
-            vastaus = vertaa_listoja(eka[i], toka[i])
+            vastaus = vertaa_listoja(eka, toka)
         
         if vastaus != 0:
             print(f"Vastaus oli {vastaus}")
@@ -67,7 +53,7 @@ def vertaa_listoja(eka: list, toka: list) -> int:
             print(f"No nyt meni pieleen")
             input("Höhöööö")
 
-with open("mielenkiintoinen.txt") as f:
+with open("data.txt") as f:
     parit = []
     pari = []
     for r in f:
@@ -82,7 +68,7 @@ vastaustuplet = []
 for i in range(len(parit)):
     vastaus = vertaa_listoja(parit[i][0], parit[i][1])
     print(f"Paria\n{parit[i][0]} ja\n{parit[i][1]}\n verratessa vastaus oli {vastaus}")
-    _ = input("Paina enter: ")
+    # _ = input("Paina enter: ")
     print("\n" * 80)
     vastaukset.append(vastaus)
     vastaustuplet.append((i, vastaus))
