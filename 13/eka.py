@@ -1,8 +1,4 @@
-def littea_lista(lista: list) -> bool:
-    for a in list:
-        if type(a) == list:
-            return False
-    return True
+import copy
 
 def vertaa_listoja(eka: list, toka: list) -> int:
     vastaus = 0
@@ -34,7 +30,7 @@ def vertaa_listoja(eka: list, toka: list) -> int:
                 else:
                     raise ValueError("Numerot eivät vertautuneet")
             elif type(eka[i]) == list:
-                vastaus = vertaa_listoja(eka[i], toka[i])
+                vastaus = vertaa_listoja(copy.deepcopy(eka[i]), copy.deepcopy(toka[i]))
         
         else: #eka[i] ja toka[i] eri tyyppiä
             if type(eka[i]) == int:
@@ -43,7 +39,7 @@ def vertaa_listoja(eka: list, toka: list) -> int:
                 toka[i] = [toka[i]]
             else:
                 raise ValueError("Eri tyypit sekaisin")
-            vastaus = vertaa_listoja(eka, toka)
+            vastaus = vertaa_listoja(copy.deepcopy(eka), copy.deepcopy(toka))
         
         if vastaus != 0:
             print(f"Vastaus oli {vastaus}")
@@ -66,9 +62,9 @@ with open("data.txt") as f:
 vastaukset = []
 vastaustuplet = []
 for i in range(len(parit)):
-    vastaus = vertaa_listoja(parit[i][0], parit[i][1])
+    vastaus = vertaa_listoja(copy.deepcopy(parit[i][0]), copy.deepcopy(parit[i][1]))
     print(f"Paria\n{parit[i][0]} ja\n{parit[i][1]}\n verratessa vastaus oli {vastaus}")
-    _ = input("Paina enter: ")
+    # _ = input("Paina enter: ")
     print("\n" * 80)
     vastaukset.append(vastaus)
     vastaustuplet.append((i, vastaus))

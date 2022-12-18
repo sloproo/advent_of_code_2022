@@ -23,14 +23,14 @@ def vertaa_listoja(eka: list, toka: list) -> int:
                     pass
                 elif eka[i] < toka[i]:
                     vastaus = 1
-                    print(f"Vastaus oli {vastaus}")
+                    # print(f"Vastaus oli {vastaus}")
                 elif eka[i] > toka[i]:
                     vastaus = 2
                     # print(f"Vastaus oli {vastaus}")
                 else:
                     raise ValueError("Numerot eivät vertautuneet")
             elif type(eka[i]) == list:
-                vastaus = vertaa_listoja(eka[i], toka[i])
+                vastaus = vertaa_listoja(copy.deepcopy(eka[i]), copy.deepcopy(toka[i]))
         
         else: #eka[i] ja toka[i] eri tyyppiä
             if type(eka[i]) == int:
@@ -39,7 +39,7 @@ def vertaa_listoja(eka: list, toka: list) -> int:
                 toka[i] = [toka[i]]
             else:
                 raise ValueError("Eri tyypit sekaisin")
-            vastaus = vertaa_listoja(eka, toka)
+            vastaus = vertaa_listoja(copy.deepcopy(eka), copy.deepcopy(toka))
         
         if vastaus != 0:
             # print(f"Vastaus oli {vastaus}")
@@ -59,6 +59,8 @@ with open("data.txt") as f:
             if vertaa_listoja(rivi, copy.deepcopy(paketit[i])) == 1:
                 paketit.insert(i, eval(r.strip()))
                 break
+        else:
+            paketit.append(eval(r.strip()))
 
 eka = paketit.index([[2]])
 toka = paketit.index([[6]])
