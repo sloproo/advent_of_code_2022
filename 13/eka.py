@@ -1,4 +1,4 @@
-import copy
+import copy, ast
 
 def vertaa_listoja(eka: list, toka: list) -> int:
     vastaus = 0
@@ -53,7 +53,7 @@ with open("data.txt") as f:
     parit = []
     pari = []
     for r in f:
-        pari.append(eval(r.strip()))
+        pari.append(ast.literal_eval(r.strip()))
         if len(pari) == 2:
             parit.append(pari)
             pari = []

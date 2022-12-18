@@ -1,4 +1,4 @@
-import copy
+import copy, ast
 
 def vertaa_listoja(eka: list, toka: list) -> int:
     vastaus = 0
@@ -54,13 +54,13 @@ with open("data.txt") as f:
     for r in f:
         if r == "\n":
             continue
-        rivi = eval(r.strip())
+        rivi = ast.literal_eval(r.strip())
         for i in range(len(paketit)):
             if vertaa_listoja(rivi, copy.deepcopy(paketit[i])) == 1:
-                paketit.insert(i, eval(r.strip()))
+                paketit.insert(i, ast.literal_eval(r.strip()))
                 break
         else:
-            paketit.append(eval(r.strip()))
+            paketit.append(ast.literal_eval(r.strip()))
 
 eka = paketit.index([[2]])
 toka = paketit.index([[6]])
