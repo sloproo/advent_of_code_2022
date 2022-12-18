@@ -1,18 +1,14 @@
-def littea_lista(lista: list) -> bool:
-    for a in list:
-        if type(a) == list:
-            return False
-    return True
+import copy
 
 def vertaa_listoja(eka: list, toka: list) -> int:
     vastaus = 0
-    print(f"Verrataan paria\n{eka}\n\n{toka}\n")
+    # print(f"Verrataan paria\n{eka}\n\n{toka}\n")
     for i in range(max((len(eka), len(toka)))):
         if i == len(eka):
-            print("Ekasta loppuu pituus")
+            # print("Ekasta loppuu pituus")
             vastaus = 1
         elif i == len(toka):
-            print("Tokasta loppuu pituus")
+            # print("Tokasta loppuu pituus")
             vastaus = 2
         
         elif eka[i] == toka[i]:
@@ -20,7 +16,7 @@ def vertaa_listoja(eka: list, toka: list) -> int:
         
         elif type(eka[i]) == type(toka[i]):
             if type(eka[i]) == int:
-                print(f"Verrataan lukuja {eka[i]} ja {toka[i]}")
+                # print(f"Verrataan lukuja {eka[i]} ja {toka[i]}")
                 if eka[i] == toka[i]:
                     print("Verrattavat luvut/listat olivat samat, pass " + 
                         "(äskeinen continue tässä oli ehkä virhe)")
@@ -30,7 +26,7 @@ def vertaa_listoja(eka: list, toka: list) -> int:
                     print(f"Vastaus oli {vastaus}")
                 elif eka[i] > toka[i]:
                     vastaus = 2
-                    print(f"Vastaus oli {vastaus}")
+                    # print(f"Vastaus oli {vastaus}")
                 else:
                     raise ValueError("Numerot eivät vertautuneet")
             elif type(eka[i]) == list:
@@ -46,7 +42,7 @@ def vertaa_listoja(eka: list, toka: list) -> int:
             vastaus = vertaa_listoja(eka, toka)
         
         if vastaus != 0:
-            print(f"Vastaus oli {vastaus}")
+            # print(f"Vastaus oli {vastaus}")
             return vastaus
         
         if vastaus == 0:
@@ -54,36 +50,17 @@ def vertaa_listoja(eka: list, toka: list) -> int:
             input("Höhöööö")
 
 with open("data.txt") as f:
-    parit = []
-    pari = []
+    paketit = [[[2]], [[6]]]
     for r in f:
-        pari.append(eval(r.strip()))
-        if len(pari) == 2:
-            parit.append(pari)
-            pari = []
-            f.readline()
+        if r == "\n":
+            continue
+        rivi = eval(r.strip())
+        for i in range(len(paketit)):
+            if vertaa_listoja(rivi, copy.deepcopy(paketit[i])) == 1:
+                paketit.insert(i, eval(r.strip()))
+                break
 
-vastaukset = []
-vastaustuplet = []
-for i in range(len(parit)):
-    vastaus = vertaa_listoja(parit[i][0], parit[i][1])
-    print(f"Paria\n{parit[i][0]} ja\n{parit[i][1]}\n verratessa vastaus oli {vastaus}")
-    _ = input("Paina enter: ")
-    print("\n" * 80)
-    vastaukset.append(vastaus)
-    vastaustuplet.append((i, vastaus))
+eka = paketit.index([[2]])
+toka = paketit.index([[6]])
 
-oikein_menneiden_indeksit= []
-oikeiden_indeksien_summa = 0
-for i in range(len(vastaukset)):
-    if vastaukset[i] == 1:
-        oikein_menneiden_indeksit.append(i)
-        oikeiden_indeksien_summa += i+1
-
-kasvatetut_indeksit = [ind + 1 for ind in oikein_menneiden_indeksit]
-
-
-print(f"Oikeassa järjestyksessä olleiden parien indeksien summa on {oikeiden_indeksien_summa}")
-print(f"Toisin sanoen {sum(kasvatetut_indeksit)}")
-print(f"Oikein menivät parit: {oikein_menneiden_indeksit}")
-
+print(f"Jakajapaketit ovat riveillä {eka+1} ja {toka+1} . {eka+1} * {toka+1} = {(eka+1) * (toka+1)} .")
