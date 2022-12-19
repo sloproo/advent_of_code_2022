@@ -1,0 +1,82 @@
+def yhdista(eka: tuple, toka: tuple, kartta: list) -> list:
+    kivipisteet = []
+    if eka[0] == toka[0]:
+        x = eka[0]
+        for y in range(min(eka[1], toka[1]), max(eka[1], toka[1]) +1):
+            kivipisteet.append((x, y))
+    elif eka[1] == toka[1]:
+        y = eka[1]
+        for x in range(min(eka[0], toka[0]), max(eka[0], toka[0]) +1):
+            kivipisteet.append((x, y))
+    else:
+        raise ValueError("Viiva samassa kohdassa olevasta pisteestä itseensä")
+
+    for x, y in kivipisteet:
+        kartta[y][x - pienin_x + 1] = "#"
+    return kartta
+
+def nayta(kartta:list):
+    kokonaisuus = ""
+    for rivi in kartta:
+        tulostusrivi = ""
+        for kohta in rivi:
+            tulostusrivi += kohta
+        tulostusrivi += "\n"
+        kokonaisuus += tulostusrivi
+    print(kokonaisuus)
+
+# x- koordinaatti: x - pienin_x + 1
+def pudota(koordinaatti: tuple, kartta: list) -> list:
+    x, y = koordinaatti
+    x_kartta = x - pienin_x + 1
+    while kartta[y+1][x_kartta] == ".":
+        y += 1
+    if not kartta[y+1][x_kartta] in ["#", "o"]:
+        raise ValueError("Nyt pudottiin oudon päälle")
+    if kartta[y+1][x_kartta-1] == ".":
+        kartta = pudota((x-1, y+1), kartta)
+    elif kartta[y+1][x_kartta+1] == ".":
+        kartta = pudota((x+1, y+1), kartta)
+    else:
+        kartta[y][x_kartta] = "o"
+    return kartta
+
+viivat = []
+with open("data.txt") as f:
+    for r in f:
+        viivat.append([tuple(int(numero) for numero in piste.split(",")) for piste in r.strip().split(" -> ")])
+        pass
+
+kaikki_pisteet = set(piste for viiva in viivat for piste in viiva)
+vaaka = sorted(kaikki_pisteet, key= lambda piste: piste[0])
+pysty = sorted(kaikki_pisteet, key= lambda piste: piste[1])
+pienin_x = vaaka[0][0]  
+suurin_x = vaaka[-1][0]
+pienin_y = pysty[0][1]
+suurin_y = pysty[-1][1]
+
+leveys = suurin_x - pienin_x + 2
+korkeus = suurin_y + 2
+
+kartta = []
+for i in range(korkeus):
+    kartta.append(["." for __ in range(leveys + 2)])
+
+for viiva in viivat:
+    for p in range(1, len(viiva)):
+        eka = viiva[p-1]
+        toka = viiva[p]
+        kartta = yhdista(eka, toka, kartta)
+
+
+i = 0
+try:
+    while True:
+        i += 1
+        print(f"pudotetaan {i}. hiekanjyvänen")
+        kartta = pudota((500, 0), kartta)
+        # nayta(kartta)
+        print(f"pudotettiin {i}. hiekanjyvänen")
+except IndexError:
+    nayta(kartta)
+    print(f"Pudotettiin onnistuneesti {i-1} hiekanjyvästä")
