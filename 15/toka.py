@@ -63,23 +63,34 @@ def rivin_nakyvat_vaakaruudut(rivi: int, sensorit: list) -> int:
     yhdistellyt = yhdistele(haarukat)
     return yhdistellyt
 
-def nakyvien_maara_haarukassa(rivi: list, haarukat: list, majakat: list) -> int:
-    nakyvia = 0
-    for haarukka in haarukat:
-        nakyvia += len(range(haarukka[0], haarukka[1]))
-
-    # Vähennetään mahdolliset majakat tarkasteluriviltä
-    for majakka in majakat:
-        if majakka[1] == tarkkailurivi:
-            for haarukka in haarukat:
-                if majakka[0] in range(haarukka[0], haarukka[1]):
-                    nakyvia -= 1
-    
-    return nakyvia
-
 sensorit, majakat = lue("data.txt")
-tarkkailurivi = 2000000
-haarukat = rivin_nakyvat_vaakaruudut(tarkkailurivi, sensorit)
-nakyvia = nakyvien_maara_haarukassa(tarkkailurivi, haarukat, majakat)
+maksimi = 4000000
 
-print(f"Rivillä {tarkkailurivi} oli {nakyvia} ruutua joissa ei voi olla majakkaa")
+for y in range(maksimi +1):
+    if y % 5git 0000 == 0:
+        print(f"Ollaan rivillä {y}")
+    peitto = rivin_nakyvat_vaakaruudut(y, sensorit)
+    if len(peitto) == 1:
+        if 0 < peitto[0][0]:
+            print(f"Rivillä {y} peitto oli {peitto} ja ainakin 0 on katveessa.")
+            x = 0
+            oikea_y = y
+            break
+        elif maksimi >= peitto[0][1]:
+            print(f"Rivillä {y} peitto oli {peitto} ja ainakin {maksimi} on katveessa.")
+            x = maksimi
+            oikea_y = y
+            break
+        continue
+    elif len(peitto) > 1:
+        print(f"Rako peitossa {peitto} rivillä {y}!")
+        print(f"Rakoon jäi {peitto[0][1]}")
+        x = peitto[0][1]
+        oikea_y = y
+        break
+    else:
+        raise ValueError("Rivillä ei lainkaan peittoa")
+    
+
+print(f"Sokea piste löytyi kohdasta y = {oikea_y} , x = {x} .")
+print(f"Viritystaajuus on {x} * 4000000 + {oikea_y} = {x * 4000000 + oikea_y}")
