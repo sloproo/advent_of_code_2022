@@ -73,9 +73,9 @@ i = 0
 try:
     while True:
         i += 1
-        print(f"pudotetaan {i}. hiekanjyvänen")
+        # print(f"pudotetaan {i}. hiekanjyvänen")
         kartta = pudota((500, 0), kartta)
-        print(f"pudotettiin {i}. hiekanjyvänen")
+        # print(f"pudotettiin {i}. hiekanjyvänen")
         if kartta[0][500] == "o":
             print(f"{i} hiekanjyvästä pudotettiin, vikan jälkeen tuloreikä on tukossa")
             break
