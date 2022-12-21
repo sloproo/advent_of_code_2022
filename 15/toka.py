@@ -67,7 +67,7 @@ sensorit, majakat = lue("data.txt")
 maksimi = 4000000
 
 for y in range(maksimi +1):
-    if y % 5git 0000 == 0:
+    if y % 50000 == 0:
         print(f"Ollaan rivillä {y}")
     peitto = rivin_nakyvat_vaakaruudut(y, sensorit)
     if len(peitto) == 1:
