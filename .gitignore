@@ -3,6 +3,8 @@ data.txt
 alku.txt
 alku2.txt
 leikkikenttä.py
+.gitignore
+15/aku.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -133,4 +135,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-15/aku.txt
