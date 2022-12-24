@@ -35,11 +35,15 @@ def kartoita(huoneet: dict) -> dict:
             matkat[alku][maali] = matka
     return matkat
 
-def huoneeseen(venttiilit: dict, huoneet: dict, kartoitus: dict, kaydyt: list, 
+def huoneeseen(vakiot: tuple, kaydyt: list, 
         saapumishuone: str, aikaa: int, paine: int) -> int:
     taydennetty_kaydyt = kaydyt + [saapumishuone]
     # print(f"Saavutaan huoneeseen {saapumishuone}")
     # print(f"Käydyt huoneet: {kaydyt}")
+    
+    venttiilit = vakiot[0]
+    huoneet = vakiot[1]
+    kartoitus= vakiot[2]
     kootut_paineet = []
     if aikaa < 1:
         # print(f"Aikaa alle minuutti, palautetaan")
@@ -59,7 +63,7 @@ def huoneeseen(venttiilit: dict, huoneet: dict, kartoitus: dict, kaydyt: list,
         # print(f"Mennään huoneeseen {venttiilihuone}")
         # print(f"Aikaa menee {kartoitus[saapumishuone][venttiilihuone]}")
         # print(f"Aikaa jäljellä {aikaa - kartoitus[saapumishuone][venttiilihuone]}")
-        alempaa_saatu = huoneeseen(venttiilit, huoneet, kartoitus, taydennetty_kaydyt,
+        alempaa_saatu = huoneeseen(vakiot, taydennetty_kaydyt,
                         venttiilihuone, aikaa - kartoitus[saapumishuone][venttiilihuone], 
                         paine + paineen_lisays)
         if alempaa_saatu == 1660:
@@ -69,6 +73,5 @@ def huoneeseen(venttiilit: dict, huoneet: dict, kartoitus: dict, kaydyt: list,
     # print(f"Kaikki vaihtoehdot läpikäyty, palautetaan ylöspäin max {paine} vs.")
     # print(f"max {paineet_alempaa}")
     kootut_paineet = list(set(kootut_paineet))
-    pass
 
     return max(kootut_paineet)

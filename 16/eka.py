@@ -26,6 +26,7 @@ venttiilit = dict(sorted(venttiilit.items(), key= lambda venttiili: venttiili[1]
 aikaa = 30  
 sijainti = "AA"
 paine = 0
+vakiot = (venttiilit, huoneet, kartoitus)
 
-paine = apu.huoneeseen(venttiilit, huoneet, kartoitus, [], sijainti, aikaa, paine)
+paine = apu.huoneeseen(vakiot, [], sijainti, aikaa, paine)
 print(paine)
