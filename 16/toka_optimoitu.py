@@ -32,7 +32,7 @@ paine = 0
 paras_kombo = 0
 komboja_yht = 0
 
-ihten_avainniput = itertools.combinations(venttiilit.keys(), 7)
+ihten_avainniput = itertools.combinations(venttiilit.keys(), len(venttiilit) // 2)
 for ihten_avaimet in ihten_avainniput:
     norsun_avaimet = venttiilit.keys() - ihten_avaimet
     # print(f"Ihten avaimet: {ihten_avaimet}\nNorsun avaimet: {norsun_avaimet}")
