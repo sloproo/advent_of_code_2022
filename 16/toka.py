@@ -1,4 +1,5 @@
-import apu2
+import apu2, time
+aika_alussa = time.time()
 
 class Huone:
     def __init__(self, nimi: str, paine: int, reitit: list):
@@ -30,5 +31,6 @@ paine = 0
 
 paine = apu2.kierros(("AA", 0), ("AA", 0), vakiot, ["AA"], 
         ["AA"], aikaa, 0)
-pass
+aika_lopussa = time.time()
 print(paine)
+print(f"Aikaa meni {aika_lopussa - aika_alussa}")
