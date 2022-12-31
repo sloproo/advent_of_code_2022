@@ -1,5 +1,3 @@
-import itertools, random
-
 torni = ["#" *7]
 korkeus = 0
 
