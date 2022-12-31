@@ -14,7 +14,6 @@ vapaita_sivuja = 0
 with open("data.txt") as f:
     for r in f:
         x, y, z = (int(luku) for luku in r.strip().split(","))
-        print(f"(x, y, z): ({x}, {y}, {z})")
         viereiset = naapurit(x, y, z)
         sivuja_tulossa = 6
         for naapuri in viereiset:
@@ -24,5 +23,3 @@ with open("data.txt") as f:
         vokselit.append((x, y, z))
 
 print(f"Vapaita sivuja on {vapaita_sivuja}")
-
-
