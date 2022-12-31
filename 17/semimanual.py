@@ -36,6 +36,8 @@ print(f"Syklien loputtua jäljelle jää vielä {sykleista_yli} kiveä")
 # plus 57117 * 26973243 = 1540630720431
 
 sykleista = sykleja * syklin_kasvu
-muuten 
+muuten = 3285320
+vastaus = sykleista + muuten
+print(f"Vastaus on sykleistä {sykleista} + muuten {muuten} = {vastaus}")
 
 
