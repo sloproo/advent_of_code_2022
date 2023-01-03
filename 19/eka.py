@@ -24,7 +24,7 @@ class Kaava:
         return True
 
     def aikaa_obsin_riittamiseen(self) -> int:
-        if (self.geo_obsia - self.obsia) % self.robotit[2] != 0:
+        if (self.hinnat[3][2] - self.rahat[2]) % self.robotit[2] != 0:
             aikaa_obsin_riittamiseen = (self.geo_obsia - self.obsia) // self.robotit[2] + 1
         else:
             aikaa_obsin_riittamiseen = (self.geo_obsia - self.obsia) // self.robotit[2]
@@ -42,7 +42,7 @@ class Kaava:
             self.rakentuva = None
 
     def paata_rakennettava(self):
-        if self.rakenna_geo():
+        if self.rakenna(3):
             return
         aikaa_obsiin = self.aikaa_obsin_riittamiseen()
         """
