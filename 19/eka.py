@@ -2,53 +2,26 @@ class Kaava:
     def __init__(self, nro: int, ore_orea: int, savi_orea: int, obs_orea: int,
                 obs_savea:int, geo_orea: int, geo_obsia: int):
                     self.nro = nro
-                    self.ore_orea = ore_orea
-                    self.savi_orea = savi_orea
-                    self.obs_orea = obs_orea
-                    self.obs_savea = obs_savea
-                    self.geo_orea = geo_orea
-                    self.geo_obsia = geo_obsia
-                    self.orea = 0
-                    self.savea = 0
-                    self.obsia = 0
-                    self.geoja = 0
+                    self.hinnat = [[0 for __ in range(4)] for _ in range(4)]
+                    self.hinnat[0][0] = ore_orea
+                    self.hinnat[1][0] = savi_orea
+                    self.hinnat[2][0] = obs_orea
+                    self.hinnat[2][1] = obs_savea
+                    self.hinnat[3][0] = geo_orea
+                    self.hinnat[3][2] = geo_obsia
+                    self.rahat = [0 for _ in range(4)]
                     self.robotit = [1, 0, 0, 0]
                     self.rakentuva = None
                     self.aikaa = 26
 
-    def rakenna_ore(self) -> bool:
-        if self.orea >= self.ore_orea:
-            self.rakentuva = 0
-            self.orea -= self.ore_orea
-            return True
-        else:
-            return False
-
-    def rakenna_savi(self) -> bool:
-        if self.orea >= self.savi_orea:
-            self.rakentuva = 1
-            self.orea -= self.savi_orea
-            return True
-        else:
-            return False
-    
-    def rakenna_obs(self) -> bool:
-        if self.orea >= self.obs_orea and self.savea >= self.obs_savea:
-            self.rakentuva = 2
-            self.orea -= self.obs_orea
-            self.savea -= self.obs_savea
-            return True
-        else:
-            return False
-
-    def rakenna_geo(self) -> bool:
-        if self.orea >= self.geo_orea and self.obsia >= self.geo_obsia:
-            self.rakentuva = 3
-            self.orea -= self.geo_orea
-            self.obsia -= self.geo_obsia
-            return True
-        else:
-            return False
+    def rakenna(self, robo: int) -> bool:
+        for i in range(4):
+            if self.rahat[i] >= self.hinnat[robo][i]:
+                continue
+            else:
+                return False
+        self.rakentuva = robo
+        return True
 
     def aikaa_obsin_riittamiseen(self) -> int:
         if (self.geo_obsia - self.obsia) % self.robotit[2] != 0:
@@ -58,14 +31,12 @@ class Kaava:
         return aikaa_obsin_riittamiseen
 
     def keraa(self):
-        self.orea += self.robotit[0]
-        self.savea += self.robotit[1]
-        self.obsia += self.robotit[2]
-        self.geoja += self.robotit[3]
+        for i in range(4):
+            self.rahat[i] += self.robotit[i]
 
     def valmista(self):
         if self.rakentuva == None:
-            return
+            pass
         else:
             self.robotit[self.rakentuva] += 1
             self.rakentuva = None
@@ -111,3 +82,60 @@ with open("alku.txt") as f:
 
 ekasta = kaavat[1].pyorita()
 print(ekasta)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # def rakenna_ore(self) -> bool:
+    #     if self.orea >= self.ore_orea:
+    #         self.rakentuva = 0
+    #         self.orea -= self.ore_orea
+    #         return True
+    #     else:
+    #         return False
+
+    # def rakenna_savi(self) -> bool:
+    #     if self.orea >= self.savi_orea:
+    #         self.rakentuva = 1
+    #         self.orea -= self.savi_orea
+    #         return True
+    #     else:
+    #         return False
+    
+    # def rakenna_obs(self) -> bool:
+    #     if self.orea >= self.obs_orea and self.savea >= self.obs_savea:
+    #         self.rakentuva = 2
+    #         self.orea -= self.obs_orea
+    #         self.savea -= self.obs_savea
+    #         return True
+    #     else:
+    #         return False
+
+    # def rakenna_geo(self) -> bool:
+    #     if self.orea >= self.geo_orea and self.obsia >= self.geo_obsia:
+    #         self.rakentuva = 3
+    #         self.orea -= self.geo_orea
+    #         self.obsia -= self.geo_obsia
+    #         return True
+    #     else:
+    #         return False
