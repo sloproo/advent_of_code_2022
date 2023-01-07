@@ -15,11 +15,20 @@ for i in range(len(jono)):
     liike = liikkuva[1]
     uusi_paikka = indeksi + liike
 
-    while uusi_paikka < 0:
-        uusi_paikka += len(jono)
+    # while uusi_paikka < 0:
+    #     uusi_paikka += len(jono)
 
-    while uusi_paikka > len(jono):
-        uusi_paikka -= len(jono)
+    # while uusi_paikka > len(jono):
+    #     uusi_paikka -= len(jono)
+
+    if uusi_paikka < 0:
+            uusi_paikka = abs(uusi_paikka)
+            uusi_paikka = uusi_paikka % len(jono)
+            uusi_paikka = - uusi_paikka
+            uusi_paikka += len(jono)
+
+    if uusi_paikka > len(jono):
+        uusi_paikka = uusi_paikka % len(jono)
 
     if uusi_paikka == len(jono) or uusi_paikka == 0:
         jono.append(liikkuva)
