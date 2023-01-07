@@ -50,7 +50,6 @@ class Kaava:
         maksimi = 0
         for seuraava in range(1, -1, -1):
                 talta = self.kierros([0, 0, 0, 0], [1, 0, 0, 0], seuraava, 32)
-                print("1 päätason kierros käyty")
                 maksimi = max([maksimi, talta])
         return maksimi
     
@@ -76,6 +75,8 @@ class Kaava:
                     saadut_geot.append(talta)
                 else:
                     for seuraava in range(2, -1, -1):
+                        if self.rahat_riittaa(rahat, 3) and seuraava != 3:
+                            continue
                         if robot[seuraava] == self.maksimit[seuraava] and seuraava != 3:
                             continue
                         if self.turhaa(seuraava, robot):

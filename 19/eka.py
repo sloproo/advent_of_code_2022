@@ -71,6 +71,8 @@ class Kaava:
             if rakennettu:
                 saadut_geot = [rahat[3]]
                 for seuraava in range(3, -1, -1):
+                    if self.rahat_riittaa(rahat, 3) and seuraava != 3:
+                        continue
                     if robot[seuraava] == self.maksimit[seuraava] and seuraava != 3:
                         continue
                     if self.turhaa(seuraava, robot):
@@ -103,5 +105,3 @@ print(laadut)
 print(laatu_yht)
 
 print(f"Vastaus on {laatu_yht} ")
-
-
