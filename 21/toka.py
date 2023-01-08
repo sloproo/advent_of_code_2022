@@ -14,9 +14,39 @@ def laske(apina: list) -> int:
         #     print("Eikä edes mennyt tasan")
         #     input("Paina enter: ")
         return apina[0] // apina[2]
-    pass
 
-
+def reverse(yhtalo: str, tavoite: int) -> int:
+    osat = yhtalo.split(" ")
+    if osat[0] == "aiempi":
+        toisen_indeksi = 2
+        toinen_luku = int(osat[2])
+    elif osat[2] == "aiempi":
+        toisen_indeksi = 0
+        toinen_luku = int(osat[0])
+    else:
+        input("täällä ei pitäisi olla")
+    operaattori = osat[1]
+    # print(f"Käännetään yhtälö {osat} , tavoite on {tavoite}")
+    if operaattori == "/":
+        if toisen_indeksi == 0:
+            return toinen_luku / tavoite
+        elif toisen_indeksi ==2:
+            return tavoite * toinen_luku
+        print(f"Kerrotaan luvulla {toinen_luku}")
+        return tavoite * toinen_luku
+    if operaattori == "+":
+        return tavoite - toinen_luku
+    if operaattori == "-":
+        if toisen_indeksi == 0:
+            return toinen_luku - tavoite
+        if toisen_indeksi ==2:
+            return toinen_luku + tavoite
+        
+    if operaattori == "*":
+        # print("kertolasku toisin päin")
+        # print(f"edellinen jaettava = {edellinen} , toinen luku = {toinen_luku}")
+        # print(f"Näiden jakojäännös on {tavoite % toinen_luku} eli jos != 0, ei mene tasan ja ollaan ongelmissa.")
+        return tavoite / toinen_luku
 
 with open("data.txt") as f:
     for r in f:
@@ -27,7 +57,6 @@ with open("data.txt") as f:
         else:
             huuto = huuto.split(" ")
         apinat[nimi] = huuto
-        pass
     orig_apinat = copy.deepcopy(apinat)
 
 seurattavat = {"humn"}
@@ -73,7 +102,6 @@ while type(apinat["root"]) != int:
                     
                 apinat[eka] = laske(apinat[eka])
 
-# print(f"Apinan nimeltä root luku on {apinat['root']}")
 print(f"Apinan root alkuperäinen lasku oli {orig_apinat['root']}")
 
 for i in [0, 2]:
@@ -86,39 +114,6 @@ for i in [0, 2]:
         tavoite = apinat[orig_apinat['root'][i]]
 
 print(f"Eli\n\n{verrokin_juuret[1:-1]}\n\npitäisi olla yhtä kuin\n\n{tavoite} ")
-
-def reverse(yhtalo: str, tavoite: int) -> int:
-    osat = yhtalo.split(" ")
-    if osat[0] == "aiempi":
-        toisen_indeksi = 2
-        toinen_luku = int(osat[2])
-    elif osat[2] == "aiempi":
-        toisen_indeksi = 0
-        toinen_luku = int(osat[0])
-    else:
-        input("täällä ei pitäisi olla")
-    operaattori = osat[1]
-    # print(f"Käännetään yhtälö {osat} , tavoite on {tavoite}")
-    if operaattori == "/":
-        if toisen_indeksi == 0:
-            return toinen_luku / tavoite
-        elif toisen_indeksi ==2:
-            return tavoite * toinen_luku
-        print(f"Kerrotaan luvulla {toinen_luku}")
-        return tavoite * toinen_luku
-    if operaattori == "+":
-        return tavoite - toinen_luku
-    if operaattori == "-":
-        if toisen_indeksi == 0:
-            return toinen_luku - tavoite
-        if toisen_indeksi ==2:
-            return toinen_luku + tavoite
-        
-    if operaattori == "*":
-        # print("kertolasku toisin päin")
-        # print(f"edellinen jaettava = {edellinen} , toinen luku = {toinen_luku}")
-        # print(f"Näiden jakojäännös on {tavoite % toinen_luku} eli jos != 0, ei mene tasan ja ollaan ongelmissa.")
-        return tavoite / toinen_luku
 
 edellinen = tavoite
 for i in range(len(operaatiot)-2, -1, -1):
