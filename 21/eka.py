@@ -8,7 +8,7 @@ def laske(apina: list) -> int:
     if apina[1] == "*":
         return apina[0] * apina[2]
     if apina[1] == "/":
-        print(f"Jakolasku, jaetaan {apina[0]} / {apina[2]}")
+        # print(f"Jakolasku, jaetaan {apina[0]} / {apina[2]}")
         if apina[0] % apina[2] != 0:
             print("Eikä edes mennyt tasan")
             input("Paina enter: ")
