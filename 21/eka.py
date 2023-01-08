@@ -29,13 +29,12 @@ with open("data.txt") as f:
 while type(apinat["root"]) != int:
     for eka in apinat.keys():
         if type(apinat[eka]) == int:
-            for toka in apinat.keys():
-                if eka == toka:
-                    continue
-                if type(apinat[toka]) != int:
-                    for huuto in [0, 2]:
-                        if apinat[toka][huuto] == eka:
-                            apinat[toka][huuto] = apinat[eka]
+            continue
+        elif type(apinat[eka][0]) == str or type(apinat[eka][2]) == str:
+            haettavat = [haettava for haettava in [0, 2] if type(apinat[eka][haettava]) == str]
+            for haettava in haettavat:
+                if type(apinat[apinat[eka][haettava]]) == int:
+                    apinat[eka][haettava] = apinat[apinat[eka][haettava]]
         else:
             if type(apinat[eka][0]) == int and type(apinat[eka][2]) == int:
                 apinat[eka] = laske(apinat[eka])
