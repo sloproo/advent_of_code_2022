@@ -91,4 +91,3 @@ for apina in apinat:
 
 print(f"Kahden suurimman bisneluokituksen {bisnesluokitukset[0]} ja " +
      f"{bisnesluokitukset[1]} tulo on {bisnesluokitukset[0] * bisnesluokitukset[1]}")
-    
