@@ -80,3 +80,4 @@ try:
 except IndexError:
     nayta(kartta)
     print(f"Pudotettiin onnistuneesti {i-1} hiekanjyvästä")
+    

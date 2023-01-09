@@ -82,4 +82,3 @@ kasvatetut_indeksit = [ind + 1 for ind in oikein_menneiden_indeksit]
 print(f"Oikeassa järjestyksessä olleiden parien indeksien summa on {oikeiden_indeksien_summa}")
 print(f"Toisin sanoen {sum(kasvatetut_indeksit)}")
 print(f"Oikein menivät parit: {oikein_menneiden_indeksit}")
-
