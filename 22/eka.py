@@ -1,6 +1,8 @@
 import string, copy
 
 def liiku(y: int, x: int, vanha_suunta: str, liike: tuple[int, str]) -> tuple[int, int, str]:
+    if y == 99 and x == 90:
+        pass
     matka = liike[0]
     kaannos = liike[1]
     suunnat = ["u", "r", "d", "l"]
@@ -17,11 +19,7 @@ def liiku(y: int, x: int, vanha_suunta: str, liike: tuple[int, str]) -> tuple[in
 
     while matka > 0:
         if suunta == "r":
-            if kartta[y][x+1] == ".":
-                x += 1
-                matka -= 1
-                nayttokartta[y][x] = ">"
-            elif kartta[y][x+1] == "\n":
+            if x+1 >= len(kartta[y]):
                 for x_2 in range(len(kartta[y])):
                     if kartta[y][x_2] == " ":
                         continue
@@ -31,13 +29,17 @@ def liiku(y: int, x: int, vanha_suunta: str, liike: tuple[int, str]) -> tuple[in
                         x = x_2
                         matka -= 1
                         break
+            elif kartta[y][x+1] == ".":
+                x += 1
+                matka -= 1
+                nayttokartta[y][x] = ">"
             elif kartta[y][x+1] == "#":
                 return (y, x, uusi_suunta)
-            elif kartta [y][x+1] == " ":
+            elif kartta[y][x+1] == " ":
                 raise ValueError("Oikealla ei pitäisi tulla vastaan tyhjää")
         elif suunta == "l":
             if x-1 < 0 or kartta[y][x-1] == " ":
-                for x_2 in range(len(kartta[y]) -2, -1, -1):
+                for x_2 in range(len(kartta[y]) -1, -1, -1):
                     if kartta[y][x_2] == "#":
                         return (y, x, uusi_suunta)
                     elif kartta[y][x_2] == ".":
@@ -52,7 +54,7 @@ def liiku(y: int, x: int, vanha_suunta: str, liike: tuple[int, str]) -> tuple[in
         elif suunta == "u":
             if y == 0 or kartta[y-1][x] == " ":
                 for y_2 in range(len(kartta)-1, 0, -1):
-                    if len(kartta[y_2]) -2 < x or kartta[y_2][x] == " ":
+                    if len(kartta[y_2]) -1 < x or kartta[y_2][x] == " ":
                         continue
                     elif kartta[y_2][x] == "#":
                         return (y, x, uusi_suunta)
@@ -66,7 +68,7 @@ def liiku(y: int, x: int, vanha_suunta: str, liike: tuple[int, str]) -> tuple[in
                 y -= 1
                 matka -= 1
         elif suunta == "d":
-            if y + 1 == len(kartta) or len(kartta[y+1]) -2 < x or kartta[y+1][x] == " ":
+            if y + 1 == len(kartta) or len(kartta[y+1]) -1 < x or kartta[y+1][x] == " ":
                 for y_2 in range(0, len(kartta)):
                     if kartta[y_2][x] == "#":
                         return (y, x, uusi_suunta)
@@ -87,12 +89,12 @@ kartta = []
 
 with open("data.txt") as f:
     for r in f:
-        if r == "\n":
-            break
         kartta.append([])
-        for m in r:
+        for m in r.rstrip():
+            if m == "":
+                break
             kartta[-1].append(m)
-    liikerotla = f.readline()
+    liikerotla = r
 
 nayttokartta = copy.deepcopy(kartta)
 
