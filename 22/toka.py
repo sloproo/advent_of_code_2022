@@ -43,21 +43,21 @@ def tuloruutu(y: int, x: int, suunta: str, kaannoksia: int) -> tuple[int, int]:
         elif suunta == "u": return (sivun_pituus -1, x)
     elif kaannoksia == 1:
         if suunta == "r": return (sivun_pituus -1, y)
-        elif suunta == "d": return (sivun_pituus -x, 0)
+        elif suunta == "d": return (sivun_pituus -1 -x, 0)
         elif suunta == "l": return (0, y)
-        elif suunta == "u": return (sivun_pituus -x, sivun_pituus -1)
+        elif suunta == "u": return (sivun_pituus -1 -x, sivun_pituus -1)
     elif kaannoksia == 2:
-        if suunta == "r": return (sivun_pituus - y, sivun pituus -1)
-        elif suunta == "d": return (sivun_pituus -1, sivun_pituus -x)
-        elif suunta == "l": return (sivun_pituus - y, 0)
-        elif suunta == "u": return (0, sivun_pituus - x)
+        if suunta == "r": return (sivun_pituus -1 -y, sivun_pituus -1)
+        elif suunta == "d": return (sivun_pituus -1, sivun_pituus -1 -x)
+        elif suunta == "l": return (sivun_pituus -1 -y, 0)
+        elif suunta == "u": return (0, sivun_pituus -1 -x)
     elif kaannoksia == 3:
-        if suunta == "r": return (0, sivun_pituus -y)
+        if suunta == "r": return (0, sivun_pituus -1 -y)
         elif suunta == "d": return (x, sivun_pituus -1)
-        elif suunta == "l": return (sivun_pituus -1, sivun_pituus -y)
+        elif suunta == "l": return (sivun_pituus -1, sivun_pituus -1 -y)
         elif suunta == "u": return (x, 0)
 
-def reunan_yli(y: int, x: int, matka: int, vanha_sivu: str, suunta: str, kaannos: str) -> tuple[int, int, str, str]:
+def reunan_yli(y: int, x: int, vanha_sivu: str, suunta: str, matka: int) -> tuple[int, int, str, str]:
     print(f"Mennään reunan yli sivulta {vanha_sivu} suuntaan {suunta}")
     print(f"Askeleita jäljellä vielä {matka}")
     ylitykset = {}
@@ -69,34 +69,16 @@ def reunan_yli(y: int, x: int, matka: int, vanha_sivu: str, suunta: str, kaannos
     ylitykset["m"] = {"u": ("i", 0), "r": ("j", 1), "d": ("c", 0), "l": ("b", 1)}
     
     tuleva_sivu, kaannoksia = ylitykset[vanha_sivu][suunta]
-    uuden_y, uuden_x = tuloruutu(y, x, suunta)
+    uuden_y, uuden_x = tuloruutu(y, x, suunta, kaannoksia)
     kaannetty_seuraava = kaanna_sivu(sivut[tuleva_sivu], kaannoksia)
     uusi_suunta = reuna_suunnanmuutos(suunta, kaannoksia)
     
-    if sivut[tuleva_sivu][uuden_y][uuden_x] == "#"
+    if sivut[tuleva_sivu][uuden_y][uuden_x] == "#":
         print("Reunan takana oli #, jäädään vanhalle sivulle")
         return y, x, vanha_sivu, suunta
     
-    elif (suunta == "r" and kaannetty_seuraava[y][0] == "." 
-        or suunta == "d" and kaannetty_seuraava[0][x] == "."
-        or suunta == "l" and kaannetty_seuraava[y][sivun_pituus-1] == "."
-        or suunta == "u" and kaannetty_seuraava[sivun_pituus-1][x] == "."):
-        if suunta == "r":
-            y_uusi = y
-            x_uusi = 0
-        elif suunta == "d":
-            y_uusi = 0
-            x_uusi = x
-        elif suunta == "l":
-            y_uusi = y
-            x_uusi = sivun_pituus-1
-        elif suunta == "u":
-            y_uusi = sivun_pituus-1
-            x_uusi = x
-        y_oikaistu, x_oikaistu = oikaise_koordinaatti(y_uusi, x_uusi, kaannoksia)
-        
-        return liiku(y_oikaistu, x_oikaistu, uusi_suunta, tuleva_sivu, (matka, kaannos))
-
+    elif sivut[tuleva_sivu][uuden_y][uuden_x] == ".":
+        return liiku(uuden_y, uuden_x, tuleva_sivu, uusi_suunta, matka)
 
     else:
         raise ValueError("Reunan yli outoon paikkaan")
@@ -314,7 +296,9 @@ for liike in liikkeet:
 suuntapisteet = {"r": 0, "d": 1, "l": 2, "u": 3}
 
 
-print(f"Ollaan sijainnissa y = {y} , x = {x} , naama osoittaa suuntaan {suunta}")
-print(f"Koordinaatit lähtevät nollan sijaan ykkösestä, eli lisätään niihin 1: y = {y+1} ja x = {x+1}")
+print(f"Ollaan sijainnissa y = {y} , x = {x} sivulla {lahtosivu}, naama osoittaa suuntaan {suunta}")
+abs_y, abs_x = absoluuttinen_koordinaatti(y, x, lahtosivu)
+print(f"Absoluuttisina kordinaatteina y = {abs_y} , x = {abs_x}")
+print(f"Koordinaatit lähtevät nollan sijaan ykkösestä, eli lisätään niihin 1: y = {abs_y+1} ja x = {abs_x+1}")
 print(f"Naaman suunnasta {suunta} {suuntapisteet[suunta]} pistettä")
-print(f"1000 * {y+1} + 4 * {x+1} + {suuntapisteet[suunta]} = {1000 * (y+1) + 4 *(x+1) + suuntapisteet[suunta]}")
+print(f"1000 * {abs_y+1} + 4 * {abs_x+1} + {suuntapisteet[suunta]} = {1000 * (abs_y+1) + 4 *(abs_x+1) + suuntapisteet[suunta]}")
