@@ -1,8 +1,6 @@
 import string, copy
 
 def liiku(y: int, x: int, vanha_suunta: str, liike: tuple[int, str]) -> tuple[int, int, str]:
-    if y == 99 and x == 90:
-        pass
     matka = liike[0]
     kaannos = liike[1]
     suunnat = ["u", "r", "d", "l"]
@@ -89,12 +87,11 @@ kartta = []
 
 with open("data.txt") as f:
     for r in f:
-        kartta.append([])
-        for m in r.rstrip():
-            if m == "":
-                break
-            kartta[-1].append(m)
-    liikerotla = r
+        if r == "\n":
+            break
+        else:
+            kartta.append([m for m in r.rstrip()])
+    liikerotla = f.readline()
 
 nayttokartta = copy.deepcopy(kartta)
 
