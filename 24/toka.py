@@ -98,18 +98,29 @@ def lue(tiedosto: str) -> list:
 
 kartta = lue("data.txt")
 lumet = lue_lumet(kartta)
-oma = aloituskoordinaatti(kartta)
+k_tontut = {aloituskoordinaatti(kartta)}
 maali = maalikoordinaatti(kartta)
 
 kierros = 0
-k_tontut = {oma}
+maaleja = 0
 
 while True:
     if maali in k_tontut:
-        print(f"Maali saavutettiin kierroksen {kierros} jälkeen")
+        maaleja += 1
+        print(f"Maali saavutettiin {maaleja}. kertaa kierroksen {kierros} jälkeen")
         loppu = time.time()
-        print(f"Aikaa kului {loppu-alku} s")
-        break
+        print(f"Aikaa kulunut tähän mennessä {loppu-alku} s")
+        if maaleja == 3:
+            break
+        else:
+            print("Lähdetään toiseen suuntaan")
+            if maaleja % 2 == 1:
+                k_tontut = {maalikoordinaatti(kartta)}
+                maali = aloituskoordinaatti(kartta)
+            else:
+                k_tontut = {aloituskoordinaatti(kartta)}
+                maali = maalikoordinaatti(kartta)
+
     nayta(k_tontut, lumet, kartta)
     lumet = puhalla(lumet)
     k_tontut = menosuunnat(k_tontut, lumet, kartta)
