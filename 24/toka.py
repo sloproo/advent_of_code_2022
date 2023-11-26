@@ -125,5 +125,3 @@ while True:
     lumet = puhalla(lumet)
     k_tontut = menosuunnat(k_tontut, lumet, kartta)
     kierros += 1
-    if kierros == 100:
-        pass
